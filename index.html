@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>个人博客</title>
+  <link rel="icon" href="https://s2.loli.net/2025/05/31/C6qK1BRyAJTmpdF.png" type="image/png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+
+    .header {
+      position: relative;
+      width: 100%;
+    }
+
+    .header img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .header-title {
+      position: absolute;
+      top: 1vw;
+      left: 1vw;
+      font-size: 1.5vw;
+      font-weight: bold;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    }
+
+    .header-text {
+      position: absolute;
+      top: 13.5vh;
+      right: 7vw;
+      text-align: center;
+      color: white;
+      font-size: 4.2vw;
+      line-height: 2.4;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .line {
+      opacity: 0;
+      transform: translateX(50px);
+      animation: slideFadeIn 2s ease forwards, colorFade 5s ease-in-out 4s forwards;
+    }
+
+    .line2 {
+      animation-delay: 1.6s, 4s;
+    }
+
+    .header-button {
+      margin-top: 15vh;
+      padding: 2vw 4vw; 
+      font-size: 3vw;  
+      font-weight: bold;
+      color: #D6ECF0;
+      background-color: #0095B6;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      opacity: 0;
+      transform: scale(0.5);
+      animation: buttonPopIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      animation-delay: 3.6s;
+      transition: background-color 0.3s ease, opacity 0.3s ease;
+    }
+
+    .header-button:hover {
+      background-color: #007a91;
+      opacity: 1;
+    }
+
+    @keyframes slideFadeIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes colorFade {
+      0% {
+        color: white;
+      }
+      50% {
+        color: #6ec1e4;
+      }
+      100% {
+        color: white;
+      }
+    }
+
+    @keyframes buttonPopIn {
+      to {
+        opacity: 0.9;
+        transform: scale(1);
+      }
+    }
+
+    /* 手机端小屏适配优化 */
+    @media (max-width: 480px) {
+      .header-title {
+        font-size: 6vw;
+      }
+
+      .header-text {
+        font-size: 4.5vw;
+        top: 28vh;
+        right: 2vw;
+      }
+
+      .header-button {
+        margin-top: 12vh;
+        font-size: 6vw; 
+        padding: 2vw 5vw; 
+        border-radius: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="https://s2.loli.net/2025/05/31/uxYSCb9lLt4qeXA.jpg" alt="Header Image" />
+    <div class="header-title">Zhu Xiwei</div>
+    <div class="header-text">
+      <div class="line">我是朱熙玮</div>
+      <div class="line line2">欢迎来到我的博客</div>
+      <button class="header-button">了解更多</button>
+    </div>
+  </div>
+</body>
+</html>
