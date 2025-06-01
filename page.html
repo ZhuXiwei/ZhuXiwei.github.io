@@ -330,6 +330,7 @@
         const imgs = document.querySelectorAll('.image-wrapper img');
         const extraImg = document.querySelector('#extraImageWrapper img');
 
+        // 重置动画状态
         imgs.forEach(img => {
           img.style.animation = 'none';
           img.style.opacity = '0';
@@ -338,22 +339,30 @@
         extraImg.style.animation = 'none';
         extraImg.style.opacity = '0';
         extraImg.style.transform = 'scale(0.8)';
+
+        bottomImageContainer.style.animation = 'none';
         bottomImageContainer.style.opacity = '0';
         bottomImageContainer.style.transform = 'translateY(40px)';
+
+        // 强制重绘，确保动画可以重新触发
         void footballCardContainer.offsetWidth;
 
-        imgs.forEach(img => {
+        // 图片依次淡入放大动画
+        imgs.forEach((img, i) => {
           img.style.animation = 'particleFade 1.5s ease forwards';
-          img.style.animationDelay = '0s';
+          img.style.animationDelay = (i * 0.2) + 's'; // 缓慢错开延时
         });
 
+        // 额外图片延迟淡入动画
         setTimeout(() => {
           extraImg.style.animation = 'extraImageFadeIn 1.5s ease forwards';
         }, 1500);
 
+        // 底部图片最后滑动淡入
         setTimeout(() => {
           bottomImageContainer.style.animation = 'bottomImageSlideFade 1s ease forwards';
-        }, 3000); // 在额外图片完成后再触发
+        }, 3200);
+
       } else {
         footballCardContainer.style.display = 'none';
       }
@@ -366,6 +375,7 @@
       });
     });
 
+    // 支持url传参?tab=2
     function getQueryParam(name) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(name);
