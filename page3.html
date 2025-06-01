@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>足球信仰</title>
+  <link rel="icon" href="https://s2.loli.net/2025/05/31/C6qK1BRyAJTmpdF.png" type="image/png" />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+    nav {
+      display: flex;
+      background: none;
+      padding: 1vw 2vw;
+      border-bottom: 0.1vw solid #ddd;
+    }
+    nav button {
+      background: none;
+      border: none;
+      color: #007acc;
+      font-size: 1.2vw;
+      font-weight: 600;
+      margin-right: 2vw;
+      cursor: pointer;
+      padding: 0.3vw;
+      transition: color 0.3s ease;
+    }
+    nav button:hover {
+      color: #005f99;
+      text-decoration: underline;
+    }
+    nav button.active {
+      color: #003f66;
+      text-decoration: underline;
+      cursor: default;
+      font-weight: 700;
+    }
+    main {
+      padding: 2vw;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <button onclick="location.href='page1.html'">校园生活</button>
+    <button onclick="location.href='page2.html'">编程成就</button>
+    <button class="active">足球信仰</button>
+    <button onclick="location.href='page4.html'">旅游风光</button>
+  </nav>
+
+  <main>
+    <h1>足球信仰页面内容</h1>
+    <p>这里是足球信仰的详细介绍……</p>
+  </main>
+</body>
+</html>
