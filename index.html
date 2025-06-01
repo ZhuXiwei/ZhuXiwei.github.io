@@ -63,8 +63,8 @@
 
     .header-button {
       margin-top: 15vh;
-      padding: 2vw 4vw; 
-      font-size: 3vw;  
+      padding: 1.5vw 5vw;
+      font-size: 2.2vw;
       font-weight: bold;
       color: #D6ECF0;
       background-color: #0095B6;
@@ -91,15 +91,9 @@
     }
 
     @keyframes colorFade {
-      0% {
-        color: white;
-      }
-      50% {
-        color: #6ec1e4;
-      }
-      100% {
-        color: white;
-      }
+      0% { color: white; }
+      50% { color: #6ec1e4; }
+      100% { color: white; }
     }
 
     @keyframes buttonPopIn {
@@ -109,7 +103,7 @@
       }
     }
 
-    /* 手机端小屏适配优化 */
+    /* 手机端适配 */
     @media (max-width: 480px) {
       .header-title {
         font-size: 6vw;
@@ -123,9 +117,8 @@
 
       .header-button {
         margin-top: 12vh;
-        font-size: 6vw; 
-        padding: 2vw 5vw; 
-        border-radius: 50px;
+        font-size: 6vw;
+        padding: 2vw 8vw;
       }
     }
   </style>
@@ -137,7 +130,7 @@
     <div class="header-text">
       <div class="line">我是朱熙玮</div>
       <div class="line line2">欢迎来到我的博客</div>
-      <button class="header-button">了解更多</button>
+      <button class="header-button" onclick="location.href='about.html'">了解更多</button>
     </div>
   </div>
 </body>
