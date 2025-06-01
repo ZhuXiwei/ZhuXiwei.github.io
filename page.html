@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>个人介绍</title>
+  <style>
+    body {
+      font-family: "微软雅黑", Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f0f2f5;
+    }
+    .wrapper {
+      width: 90vw;
+      max-width: 1200px;
+      margin: 30px auto;
+    }
+    nav {
+      position: relative;
+      display: flex;
+      background: #fff;
+      border-radius: 50px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+      height: 60px;
+      user-select: none;
+    }
+    nav button {
+      flex: 1;
+      border: none;
+      background: none;
+      font-size: 18px;
+      font-weight: 600;
+      color: #222;
+      cursor: pointer;
+      z-index: 1;
+      transition: color 0.3s ease;
+    }
+    nav button:hover {
+      color: #05abe0;
+    }
+    nav button.active {
+      color: white;
+    }
+    .slider {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 25%;
+      background: linear-gradient(45deg,#05abe0 0%,#8200f4 100%);
+      border-radius: 50px;
+      transition: left 0.6s cubic-bezier(0.68,-0.55,0.625,1.55);
+      left: 0;
+      z-index: 0;
+    }
+
+    #contentArea {
+      margin-top: 30px;
+    }
+
+    #footballCardContainer {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    #footballTopRow {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      flex-wrap: nowrap;
+    }
+
+    .card {
+      width: 190px;
+      height: 254px;
+      background: #07182E;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 20px;
+      flex-shrink: 0;
+      margin-top: 20px;
+    }
+
+    .card h2 {
+      z-index: 1;
+      color: white;
+      font-size: 2em;
+      text-align: center;
+      line-height: 1.2;
+      white-space: pre-line;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      width: 100px;
+      background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+      height: 130%;
+      animation: rotBGimg 3s linear infinite;
+      transition: all 0.2s linear;
+    }
+
+    @keyframes rotBGimg {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      background: #07182E;
+      inset: 5px;
+      border-radius: 15px;
+    }
+
+    .image-set {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      flex-shrink: 1;
+      align-items: center;
+    }
+
+    .image-wrapper {
+      position: relative;
+      width: 190px;
+      height: 254px;
+      flex-shrink: 0;
+      border-radius: 15px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: scale(0.8);
+      animation-fill-mode: forwards;
+      transition: filter 0.3s ease;
+      display: block;
+    }
+
+    .image-wrapper:hover img {
+      filter: blur(2px);
+    }
+
+    .image-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: 700;
+      font-size: 2em;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      user-select: none;
+      text-shadow: 0 0 6px rgba(0,0,0,0.7);
+      white-space: nowrap;
+      color: white !important;
+    }
+
+    .image-wrapper:hover .image-label {
+      opacity: 1;
+    }
+
+    @keyframes particleFade {
+      0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+        box-shadow: 0 0 0 rgba(0,0,0,0);
+      }
+      50% {
+        opacity: 0.6;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      }
+    }
+
+    @keyframes extraImageFadeIn {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes bottomImageSlideFade {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #extraImageWrapper {
+      position: relative;
+      width: 320px;
+      height: 340px;
+      margin-left: 80px;
+      flex-shrink: 0;
+      border-radius: 0;
+      overflow: visible;
+      box-shadow: none;
+      cursor: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #extraImageWrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      border-radius: 0;
+      opacity: 0;
+      transform: scale(0.8);
+      animation-fill-mode: forwards;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    #magnifier {
+      position: absolute;
+      border: 3px solid #05abe0;
+      border-radius: 50%;
+      cursor: none;
+      width: 120px;
+      height: 120px;
+      display: none;
+      box-shadow: 0 0 10px rgba(5,171,224,0.8);
+      background-repeat: no-repeat;
+      background-size: 640px 680px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    #bottomImageContainer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    #bottomImageContainer img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      user-select: none;
+      pointer-events: none;
+      max-width: 800px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <nav>
+      <button class="active" data-index="0">校园生活</button>
+      <button data-index="1">编程成就</button>
+      <button data-index="2">足球信仰</button>
+      <button data-index="3">旅游风光</button>
+      <div class="slider"></div>
+    </nav>
+
+    <div id="contentArea"></div>
+
+    <div id="footballCardContainer" style="display:none;">
+      <div id="footballTopRow">
+        <div class="card"><h2>HOME<br>TEAM</h2></div>
+        <div class="image-set">
+          <div class="image-wrapper">
+            <img src="https://s2.loli.net/2025/06/01/LnS4whQc8P1XBlo.webp" alt="武汉三镇" />
+            <div class="image-label">武汉三镇</div>
+          </div>
+          <div class="image-wrapper">
+            <img src="https://s2.loli.net/2025/06/01/tez1srSux3iym2l.png" alt="曼城" />
+            <div class="image-label">曼城</div>
+          </div>
+          <div id="extraImageWrapper">
+            <img src="https://s2.loli.net/2025/06/01/iCAKx8WINLX5VPb.jpg" alt="额外图片" />
+            <div id="magnifier"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="bottomImageContainer">
+        <img src="https://s2.loli.net/2025/06/01/GwZLd2KCePuap53.jpg" alt="底部图片" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('nav button');
+    const slider = document.querySelector('.slider');
+    const content = document.getElementById('contentArea');
+    const footballCardContainer = document.getElementById('footballCardContainer');
+    const bottomImageContainer = document.getElementById('bottomImageContainer');
+
+    const pageTitles = ['校园生活', '编程成就', '足球信仰', '旅游风光'];
+
+    function activateTab(idx) {
+      if (idx < 0 || idx >= buttons.length) idx = 0;
+      slider.style.left = (idx * 25) + '%';
+      buttons.forEach(b => b.classList.remove('active'));
+      buttons[idx].classList.add('active');
+
+      content.innerHTML = `<h2>${pageTitles[idx]}</h2>`;
+
+      if (idx === 2) {
+        footballCardContainer.style.display = 'flex';
+
+        const imgs = document.querySelectorAll('.image-wrapper img');
+        const extraImg = document.querySelector('#extraImageWrapper img');
+
+        imgs.forEach(img => {
+          img.style.animation = 'none';
+          img.style.opacity = '0';
+          img.style.transform = 'scale(0.8)';
+        });
+        extraImg.style.animation = 'none';
+        extraImg.style.opacity = '0';
+        extraImg.style.transform = 'scale(0.8)';
+        bottomImageContainer.style.opacity = '0';
+        bottomImageContainer.style.transform = 'translateY(40px)';
+        void footballCardContainer.offsetWidth;
+
+        imgs.forEach(img => {
+          img.style.animation = 'particleFade 1.5s ease forwards';
+          img.style.animationDelay = '0s';
+        });
+
+        setTimeout(() => {
+          extraImg.style.animation = 'extraImageFadeIn 1.5s ease forwards';
+        }, 1500);
+
+        setTimeout(() => {
+          bottomImageContainer.style.animation = 'bottomImageSlideFade 1s ease forwards';
+        }, 3000); // 在额外图片完成后再触发
+      } else {
+        footballCardContainer.style.display = 'none';
+      }
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = Number(btn.dataset.index);
+        activateTab(idx);
+      });
+    });
+
+    function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      let tabIndex = parseInt(getQueryParam('tab'));
+      if (isNaN(tabIndex)) tabIndex = 0;
+      activateTab(tabIndex);
+    });
+
+    const extraWrapper = document.getElementById('extraImageWrapper');
+    const extraImg = extraWrapper.querySelector('img');
+    const magnifier = document.getElementById('magnifier');
+
+    const magnifierSize = 120;
+    const zoom = 2;
+
+    extraWrapper.addEventListener('mousemove', function(e) {
+      magnifier.style.display = 'block';
+      const rect = extraWrapper.getBoundingClientRect();
+      let x = e.clientX - rect.left;
+      let y = e.clientY - rect.top;
+
+      if (x < magnifierSize / (2 * zoom)) x = magnifierSize / (2 * zoom);
+      if (x > rect.width - magnifierSize / (2 * zoom)) x = rect.width - magnifierSize / (2 * zoom);
+      if (y < magnifierSize / (2 * zoom)) y = magnifierSize / (2 * zoom);
+      if (y > rect.height - magnifierSize / (2 * zoom)) y = rect.height - magnifierSize / (2 * zoom);
+
+      magnifier.style.left = (x - magnifierSize / 2) + 'px';
+      magnifier.style.top = (y - magnifierSize / 2) + 'px';
+      magnifier.style.backgroundImage = `url(${extraImg.src})`;
+      magnifier.style.backgroundSize = rect.width * zoom + 'px ' + rect.height * zoom + 'px';
+      magnifier.style.backgroundPosition = `-${x * zoom - magnifierSize / 2}px -${y * zoom - magnifierSize / 2}px`;
+    });
+
+    extraWrapper.addEventListener('mouseleave', function() {
+      magnifier.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
