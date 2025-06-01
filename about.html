@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>个人介绍</title>
+  <link rel="icon" href="https://s2.loli.net/2025/05/31/C6qK1BRyAJTmpdF.png" type="image/png" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #fff;
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+
+    .logo-button {
+      position: absolute;
+      top: 0.5vw;
+      left: 0.5vw;
+      width: 3vw;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: background-color 0.3s ease, opacity 0.3s ease;
+      z-index: 10;
+    }
+    .logo-button:hover {
+      opacity: 1;
+      background-color: rgba(0,149,182,0.1);
+      border-radius: 50%;
+    }
+    .logo-button img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    button.grid-item {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: bold;
+      font-size: 2.2vw;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+      user-select: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      transition: filter 0.3s ease;
+      padding-top: 0.4vw;
+    }
+
+    .item3, .item4 {
+      padding-top: 1vw;
+    }
+
+    .item1 {
+      background-image: url('https://s2.loli.net/2025/06/01/kdTfE1j2Lt3RrFc.jpg');
+      -webkit-mask-image:
+        linear-gradient(to right, black 95%, transparent 100%),
+        linear-gradient(to bottom, black 95%, transparent 100%);
+      -webkit-mask-composite: destination-in;
+      mask-image:
+        linear-gradient(to right, black 95%, transparent 100%),
+        linear-gradient(to bottom, black 95%, transparent 100%);
+      mask-composite: intersect;
+      animation: slideDown 1s ease forwards;
+    }
+    .item2 {
+      background-image: url('https://s2.loli.net/2025/06/01/sl2IEFK8e4ZaCOL.jpg');
+      -webkit-mask-image:
+        linear-gradient(to left, black 95%, transparent 100%),
+        linear-gradient(to bottom, black 95%, transparent 100%);
+      -webkit-mask-composite: destination-in;
+      mask-image:
+        linear-gradient(to left, black 95%, transparent 100%),
+        linear-gradient(to bottom, black 95%, transparent 100%);
+      mask-composite: intersect;
+      animation: slideDown 1s ease forwards;
+    }
+    .item3 {
+      background-image: url('https://s2.loli.net/2025/06/01/1jdNWQG8XFBDYM6.jpg');
+      -webkit-mask-image:
+        linear-gradient(to right, black 95%, transparent 100%),
+        linear-gradient(to top, black 95%, transparent 100%);
+      -webkit-mask-composite: destination-in;
+      mask-image:
+        linear-gradient(to right, black 95%, transparent 100%),
+        linear-gradient(to top, black 95%, transparent 100%);
+      mask-composite: intersect;
+      animation: slideLeft 1s ease forwards;
+    }
+    .item4 {
+      background-image: url('https://s2.loli.net/2025/06/01/CGfF3zdWE9cRS6B.jpg');
+      -webkit-mask-image:
+        linear-gradient(to left, black 95%, transparent 100%),
+        linear-gradient(to top, black 95%, transparent 100%);
+      -webkit-mask-composite: destination-in;
+      mask-image:
+        linear-gradient(to left, black 95%, transparent 100%),
+        linear-gradient(to top, black 95%, transparent 100%);
+      mask-composite: intersect;
+      animation: slideRight 1s ease forwards;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-30px); }
+      to { transform: translateY(0); }
+    }
+    @keyframes slideLeft {
+      from { transform: translateX(-30px); }
+      to { transform: translateX(0); }
+    }
+    @keyframes slideRight {
+      from { transform: translateX(30px); }
+      to { transform: translateX(0); }
+    }
+
+    button.grid-item:hover {
+      filter: brightness(1.1);
+    }
+
+  </style>
+</head>
+<body>
+  <button class="logo-button" onclick="window.location.href='https://www.douyin.com/user/MS4wLjABAAAAqQrBzY328dMlOKa-q1oQC6zGz4MltIGoPiNbk2nkVXZbil34bUbcJcYZold_dzOK?from_tab_name=main'">
+    <img src="https://s2.loli.net/2025/06/01/7C8e3RKj54unSab.png" alt="Logo" />
+  </button>
+
+  <div class="grid-container">
+    <button class="grid-item item1" onclick="window.location.href='page1.html'">校园生活</button>
+    <button class="grid-item item2" onclick="window.location.href='page2.html'">编程成就</button>
+    <button class="grid-item item3" onclick="window.location.href='page3.html'">足球信仰</button>
+    <button class="grid-item item4" onclick="window.location.href='page4.html'">旅游风光</button>
+  </div>
+</body>
+</html>
