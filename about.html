@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>个人介绍</title>
+  <title>我的四大方面</title>
   <link rel="icon" href="https://s2.loli.net/2025/05/31/C6qK1BRyAJTmpdF.png" type="image/png" />
   <style>
     * {
@@ -148,10 +148,16 @@
   </button>
 
   <div class="grid-container">
-    <button class="grid-item item1" onclick="window.location.href='page1.html'">校园生活</button>
-    <button class="grid-item item2" onclick="window.location.href='page2.html'">编程成就</button>
-    <button class="grid-item item3" onclick="window.location.href='page3.html'">足球信仰</button>
-    <button class="grid-item item4" onclick="window.location.href='page4.html'">旅游风光</button>
+    <button class="grid-item item1" onclick="goToPage(0)">校园生活</button>
+    <button class="grid-item item2" onclick="goToPage(1)">编程成就</button>
+    <button class="grid-item item3" onclick="goToPage(2)">足球信仰</button>
+    <button class="grid-item item4" onclick="goToPage(3)">旅游风光</button>
   </div>
+
+  <script>
+    function goToPage(index) {
+      window.location.href = `page.html?tab=${index}`;
+    }
+  </script>
 </body>
 </html>
