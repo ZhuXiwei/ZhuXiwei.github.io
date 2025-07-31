@@ -10,11 +10,14 @@
       font-family: "微软雅黑", Arial, sans-serif;
       margin: 0; padding: 0;
       background: #f0f2f5;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
     .wrapper {
       width: 90vw;
       max-width: 1200px;
       margin: 30px auto;
+      position: relative;
     }
     nav {
       position: relative;
@@ -24,6 +27,7 @@
       box-shadow: 0 5px 10px rgba(0,0,0,0.15);
       height: 60px;
       user-select: none;
+      z-index: 10;
     }
     nav button {
       flex: 1;
@@ -55,8 +59,119 @@
 
     #contentArea {
       margin-top: 30px;
+      position: relative;
+      z-index: 2;
     }
 
+    /* 校园生活玻璃磨砂效果 */
+    #campusLifeContent {
+      display: none;
+      position: relative;
+      padding: 60px 0;
+      margin: 40px 0;
+      overflow: hidden;
+    }
+    
+    .glass-container {
+      position: relative;
+      width: 100%;
+      min-height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      width: 80%;
+      max-width: 800px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* 水波光带动画 */
+    .light-wave {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      animation: wave 3s linear infinite;
+      z-index: -1;
+    }
+    
+    @keyframes wave {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(200%);
+      }
+    }
+    
+    /* 标题特效 */
+    #campusLifeTitle {
+      text-align: center;
+      font-size: 3em;
+      font-weight: bold;
+      margin: 0;
+      color: rgb(37, 108, 153);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      position: relative;
+      z-index: 2;
+      transition: all 0.5s ease;
+      animation: glow 2s infinite alternate;
+    }
+    
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+        transform: scale(1);
+      }
+      to {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.8);
+        transform: scale(1.05);
+      }
+    }
+    
+    /* 背景装饰元素 */
+    .glass-bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: -1;
+    }
+    
+    .bubble-1 {
+      width: 200px;
+      height: 200px;
+      top: -50px;
+      left: -50px;
+    }
+    
+    .bubble-2 {
+      width: 300px;
+      height: 300px;
+      bottom: -100px;
+      right: -100px;
+    }
+    
+    /* 其他页面原有样式保持不变 */
     #footballCardContainer {
       margin-top: 40px;
       display: flex;
@@ -268,6 +383,101 @@
       pointer-events: none;
       max-width: 800px;
     }
+    
+    /* 编程成就样式 */
+    #programmingContainer {
+      display: none;
+      margin-top: 30px;
+      width: 100%;
+    }
+    
+    .achievement-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      position: relative;
+    }
+    
+    .achievement-img-container {
+      position: relative;
+      max-width: 90%;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: zoom-in;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .achievement-img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: block;
+    }
+    
+    .achievement-img.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    
+    /* 放大镜样式 */
+    .achievement-magnifier {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border: 3px solid #05abe0;
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      display: none;
+      box-shadow: 0 0 15px rgba(5, 171, 224, 0.6);
+      z-index: 10;
+      background-color: white;
+    }
+    
+    /* 悬停效果 */
+    .achievement-img-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    /* 瀑布流动画延迟 */
+    .achievement-row:nth-child(1) .achievement-img {
+      transition-delay: 0.1s;
+    }
+    .achievement-row:nth-child(2) .achievement-img {
+      transition-delay: 0.3s;
+    }
+    .achievement-row:nth-child(3) .achievement-img {
+      transition-delay: 0.5s;
+    }
+    .achievement-row:nth-child(4) .achievement-img {
+      transition-delay: 0.7s;
+    }
+    
+    /* 视频容器样式 */
+    #travelVideoContainer {
+      display: none;
+      margin-top: 30px;
+      width: 100%;
+      text-align: center;
+    }
+    
+    #travelVideo {
+      max-width: 800px;
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .video-caption {
+      margin-top: 15px;
+      font-size: 1.2em;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -281,6 +491,18 @@
     </nav>
 
     <div id="contentArea"></div>
+
+    <!-- 校园生活内容 - 玻璃磨砂效果 -->
+    <div id="campusLifeContent" style="display:none;">
+      <div class="glass-container">
+        <div class="glass-bubble bubble-1"></div>
+        <div class="glass-bubble bubble-2"></div>
+        <div class="glass-card">
+          <div class="light-wave"></div>
+          <h1 id="campusLifeTitle">德智体全面发展</h1>
+        </div>
+      </div>
+    </div>
 
     <div id="footballCardContainer" style="display:none;">
       <div id="footballTopRow">
@@ -305,14 +527,56 @@
         <img src="https://s2.loli.net/2025/06/01/GwZLd2KCePuap53.jpg" alt="底部图片" />
       </div>
     </div>
+    
+    <!-- 编程成就容器 -->
+    <div id="programmingContainer">
+      <div class="achievement-row">
+        <div class="achievement-img-container">
+          <img src="https://s2.loli.net/2025/07/31/rVI98QqT5AkyPbD.jpg" alt="编程成就1" class="achievement-img">
+          <div class="achievement-magnifier"></div>
+        </div>
+      </div>
+      <div class="achievement-row">
+        <div class="achievement-img-container">
+          <img src="https://s2.loli.net/2025/07/31/8zPvsSAtgUqh5wR.jpg" alt="编程成就2" class="achievement-img">
+          <div class="achievement-magnifier"></div>
+        </div>
+      </div>
+      <div class="achievement-row">
+        <div class="achievement-img-container">
+          <img src="https://s2.loli.net/2025/07/31/dn1x6NJ98LRjl4h.jpg" alt="编程成就3" class="achievement-img">
+          <div class="achievement-magnifier"></div>
+        </div>
+      </div>
+      <div class="achievement-row">
+        <div class="achievement-img-container">
+          <img src="https://s2.loli.net/2025/07/31/7vLCjui9A6p8f3m.jpg" alt="编程成就4" class="achievement-img">
+          <div class="achievement-magnifier"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 旅游视频容器 -->
+    <div id="travelVideoContainer">
+      <video id="travelVideo" controls autoplay muted loop>
+        <source src="https://files.catbox.moe/n4bxcf.mp4" type="video/mp4">
+        您的浏览器不支持 HTML5 视频。
+      </video>
+      <div class="video-caption">我的旅行足迹</div>
+    </div>
   </div>
 
   <script>
     const buttons = document.querySelectorAll('nav button');
     const slider = document.querySelector('.slider');
     const content = document.getElementById('contentArea');
+    const campusLifeContent = document.getElementById('campusLifeContent');
     const footballCardContainer = document.getElementById('footballCardContainer');
     const bottomImageContainer = document.getElementById('bottomImageContainer');
+    const programmingContainer = document.getElementById('programmingContainer');
+    const travelVideoContainer = document.getElementById('travelVideoContainer');
+    const travelVideo = document.getElementById('travelVideo');
+    const achievementImgs = document.querySelectorAll('.achievement-img');
 
     const pageTitles = ['校园生活', '编程成就', '足球信仰', '旅游风光'];
 
@@ -324,8 +588,39 @@
 
       content.innerHTML = `<h2>${pageTitles[idx]}</h2>`;
 
-      if (idx === 2) {
+      if (idx === 0) {
+        // 校园生活页面
+        campusLifeContent.style.display = 'block';
+        footballCardContainer.style.display = 'none';
+        travelVideoContainer.style.display = 'none';
+        programmingContainer.style.display = 'none';
+      } else if (idx === 1) {
+        // 编程成就页面
+        campusLifeContent.style.display = 'none';
+        footballCardContainer.style.display = 'none';
+        travelVideoContainer.style.display = 'none';
+        programmingContainer.style.display = 'block';
+        
+        // 重置图片动画状态
+        achievementImgs.forEach(img => {
+          img.classList.remove('visible');
+        });
+        
+        // 图片依次淡入动画
+        setTimeout(() => {
+          achievementImgs.forEach((img, i) => {
+            setTimeout(() => {
+              img.classList.add('visible');
+            }, i * 300);
+          });
+        }, 100);
+        
+      } else if (idx === 2) {
+        // 足球信仰页面
+        campusLifeContent.style.display = 'none';
         footballCardContainer.style.display = 'flex';
+        travelVideoContainer.style.display = 'none';
+        programmingContainer.style.display = 'none';
 
         const imgs = document.querySelectorAll('.image-wrapper img');
         const extraImg = document.querySelector('#extraImageWrapper img');
@@ -350,7 +645,7 @@
         // 图片依次淡入放大动画
         imgs.forEach((img, i) => {
           img.style.animation = 'particleFade 1.5s ease forwards';
-          img.style.animationDelay = (i * 0.2) + 's'; // 缓慢错开延时
+          img.style.animationDelay = (i * 0.2) + 's';
         });
 
         // 额外图片延迟淡入动画
@@ -362,9 +657,17 @@
         setTimeout(() => {
           bottomImageContainer.style.animation = 'bottomImageSlideFade 1s ease forwards';
         }, 3200);
-
-      } else {
+        
+      } else if (idx === 3) {
+        // 旅游风光页面
+        campusLifeContent.style.display = 'none';
         footballCardContainer.style.display = 'none';
+        travelVideoContainer.style.display = 'block';
+        programmingContainer.style.display = 'none';
+        
+        // 重置视频状态
+        travelVideo.currentTime = 0;
+        travelVideo.play();
       }
     }
 
@@ -387,6 +690,7 @@
       activateTab(tabIndex);
     });
 
+    // 足球页面放大镜效果
     const extraWrapper = document.getElementById('extraImageWrapper');
     const extraImg = extraWrapper.querySelector('img');
     const magnifier = document.getElementById('magnifier');
@@ -415,6 +719,70 @@
     extraWrapper.addEventListener('mouseleave', function() {
       magnifier.style.display = 'none';
     });
+
+    // 编程成就页面放大镜效果
+    const achievementContainers = document.querySelectorAll('.achievement-img-container');
+    const achievementMagnifiers = document.querySelectorAll('.achievement-magnifier');
+    const zoomLevel = 2.5; // 放大倍数
+
+    achievementContainers.forEach((container, index) => {
+      const img = container.querySelector('img');
+      const magnifier = achievementMagnifiers[index];
+      
+      container.addEventListener('mousemove', function(e) {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // 计算放大镜位置
+        magnifier.style.left = `${x - 75}px`;
+        magnifier.style.top = `${y - 75}px`;
+        magnifier.style.display = 'block';
+        
+        // 设置放大镜背景
+        magnifier.style.backgroundImage = `url(${img.src})`;
+        magnifier.style.backgroundSize = `${rect.width * zoomLevel}px ${rect.height * zoomLevel}px`;
+        magnifier.style.backgroundPosition = `-${x * zoomLevel - 75}px -${y * zoomLevel - 75}px`;
+      });
+      
+      container.addEventListener('mouseleave', function() {
+        magnifier.style.display = 'none';
+      });
+    });
+
+    // 创建更多玻璃泡泡背景元素
+    function createGlassBubbles() {
+      const glassContainer = document.querySelector('.glass-container');
+      const colors = [
+        'rgba(138, 43, 226, 0.1)',  // 蓝紫色
+        'rgba(0, 191, 255, 0.1)',   // 深天蓝
+        'rgba(255, 105, 180, 0.1)', // 热粉色
+        'rgba(50, 205, 50, 0.1)'    // 酸橙绿
+      ];
+      
+      for (let i = 0; i < 8; i++) {
+        const bubble = document.createElement('div');
+        bubble.className = 'glass-bubble';
+        
+        const size = Math.random() * 150 + 50;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        bubble.style.left = `${posX}%`;
+        bubble.style.top = `${posY}%`;
+        bubble.style.background = color;
+        bubble.style.opacity = Math.random() * 0.3 + 0.1;
+        bubble.style.filter = `blur(${Math.random() * 10 + 5}px)`;
+        
+        glassContainer.appendChild(bubble);
+      }
+    }
+    
+    // 页面加载后创建泡泡
+    window.addEventListener('load', createGlassBubbles);
   </script>
 </body>
 </html>
